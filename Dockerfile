@@ -11,7 +11,7 @@ RUN \
   # Install Japanese environment
   #apt-get install -y --no-install-recommends task-japanese=3.53 locales-all=2.28-10+deb10u1 task-japanese-desktop=3.53 fcitx-mozc=2.23.2815.102+dfsg-4 && \
   # Install Utils
-  apt-get install -y --no-install-recommends gedit=3.30.2-2 unrar-free=1:0.0.1+cvs20140707-4 && \
+  apt-get install -y --no-install-recommends gedit=3.30.2-2 wget=1.20.1-1.1 && \
   apt-get -y clean
 
 RUN \
@@ -19,6 +19,10 @@ RUN \
   apt-get install -y task-japanese=3.53 locales-all=2.28-10+deb10u1 task-japanese-desktop=3.53 && \
   apt-get -y clean && \
   rm -rf /var/lib/apt/lists/*
+
+# Install unrar nonfree
+RUN wget http://ftp.de.debian.org/debian/pool/non-free/u/unrar-nonfree/unrar_5.6.6-1_amd64.deb && \
+  dpkg -i unrar_5.6.6-1_amd64.deb
 
 # Set VNC password
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
